@@ -19,11 +19,12 @@ namespace simpleCalcMP
     //decimal point [DONE]
     //clear all [DONE]
     //sqrt [DONE]
+    //sqaure [DONE]
     //history
-    //clear one char at a time
     public partial class MainWindow : Window
     {
         Button[] btnNums = new Button[10];
+        List<string> calc_history = new List<string>();
         double num1 = 0;
         double num2 = 0;
         double ope = -1;
@@ -49,12 +50,13 @@ namespace simpleCalcMP
             btnAdd.Content = "+";
             btnMin.Content = "-";
             btnMult.Content = "x";
-            btnDiv.Content = "/";
+            btnDiv.Content = "÷";
             btnEnter.Content = "=";
             btnClear.Content = "C";
             btnPoint.Content = ".";
-            btnClearChar.Content = "<--";
-            btnSqrt.Content = "x^2";
+            btnHistory.Content = "🕑";
+            btnSqrt.Content = "√x";
+            btnSquare.Content = "x^2";
 
             tbAnswer.Text = "0";
         }
@@ -160,7 +162,7 @@ namespace simpleCalcMP
         {
             ope = 3;
             tbCalc.Text += "/";
-            charOpe = btnDiv.Content.ToString();
+            charOpe = "/";
         }
         #endregion
 
@@ -173,13 +175,10 @@ namespace simpleCalcMP
             tbCalc.Text = "";
             displayAnswer();
         }
-        private void btnClear_Char(object sender, RoutedEventArgs e)
+        private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
-            string[] word = new string[] { };
-            string tempWord = tbCalc.Text;
-            tbCalc.Text = "";
-            for (int i = 0; i < tempWord.Length - 1; i++)
-                tbCalc.Text += tempWord[i];
+            for (int i = 0; i < calc_history.Count; i++)
+                MessageBox.Show(calc_history[i]);
         }
         private void btnSqrt_Click(object sender, RoutedEventArgs e)
         {
@@ -189,8 +188,17 @@ namespace simpleCalcMP
             tbCalc.Text = num1.ToString();
             displayAnswer();
         }
+        private void btnSquare_Click(object sender, RoutedEventArgs e)
+        {
+            double ans = 0;
+            ans = num1 * num1;
+            num1 = ans;
+            tbCalc.Text = num1.ToString();
+            displayAnswer();
+        }
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
+            calc_history.Add(tbCalc.Text);
             switch (ope)
             {
                 case 0:
@@ -214,6 +222,7 @@ namespace simpleCalcMP
                 ope = -1;
                 num2 = 0;
             }
+            calc_history.Add(tbAnswer.Text);
         }
         #endregion
 
