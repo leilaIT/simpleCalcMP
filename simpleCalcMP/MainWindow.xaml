@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:simpleCalcMP"
         mc:Ignorable="d"
-                Title="Simple Calculator" Height="480" Width="300">
+                Title="Simple Calculator" Height="480" Width="490">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="41*"/>
         </Grid.RowDefinitions>
+        <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="184" Margin="278,44,0,0" Grid.Row="1" VerticalAlignment="Top" Width="175"/>
+
         <Button x:Name="btn9" Content="X" HorizontalAlignment="Left" Margin="146,68,0,0" VerticalAlignment="Top" 
         Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btn9_Click" Grid.Row="1"/>
         <Button x:Name="btn8" Content="X" HorizontalAlignment="Left" Margin="91,68,0,0" VerticalAlignment="Top" 
@@ -55,6 +57,12 @@
             Width="50" Height="50" FontSize="20" FontWeight="Bold" Click="btnSquare_Click" Grid.Row="1"/>
         <Button x:Name="btnSqrt" Content="X" HorizontalAlignment="Left" Margin="91,13,0,0" VerticalAlignment="Top" 
             Width="50" Height="50" FontSize="20" FontWeight="Bold" Click="btnSqrt_Click" Grid.Row="1"/>
+        <Label x:Name="lblHistory" Content="History" HorizontalAlignment="Left" Margin="272,13,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ScrollViewer x:Name="scrvHistory" HorizontalAlignment="Left" Margin="278,44,0,0" Grid.Row="1" VerticalAlignment="Top" Width="175" Height="184" >
+
+            <TextBlock x:Name="tblHistory" TextWrapping="Wrap" FontSize="16" Height="184" Width="175" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+        </ScrollViewer>
 
     </Grid>
 </Window>

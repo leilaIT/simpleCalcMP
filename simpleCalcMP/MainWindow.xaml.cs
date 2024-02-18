@@ -19,8 +19,8 @@ namespace simpleCalcMP
     //decimal point [DONE]
     //clear all [DONE]
     //sqrt [DONE]
-    //sqaure [DONE]
-    //history
+    //square [DONE]
+    //history [DONE]
     public partial class MainWindow : Window
     {
         Button[] btnNums = new Button[10];
@@ -132,7 +132,18 @@ namespace simpleCalcMP
         }
         private void btnDec_Point(object sender, RoutedEventArgs e)
         {
-            numberEnter("0.");
+            string point = ".";
+            double num = 0;
+            
+            if (ope == -1)
+                num = num1;
+            else
+                num = num2;
+
+            if (num == 0)
+                point = "0.";
+
+            numberEnter(point);
         }
         #endregion
 
@@ -177,23 +188,29 @@ namespace simpleCalcMP
         }
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
+            tblHistory.Text = "";
             for (int i = 0; i < calc_history.Count; i++)
-                MessageBox.Show(calc_history[i]);
+                tblHistory.Text += calc_history[i] + "\n";
         }
         private void btnSqrt_Click(object sender, RoutedEventArgs e)
         {
             double ans = 0;
-            ans = Math.Sqrt(double.Parse(tbCalc.Text));
-            num1 = ans;
-            tbCalc.Text = num1.ToString();
-            displayAnswer();
+            sqrFunctions(ans = Math.Sqrt(double.Parse(tbCalc.Text)), "x^2");
         }
         private void btnSquare_Click(object sender, RoutedEventArgs e)
         {
             double ans = 0;
-            ans = num1 * num1;
+            sqrFunctions(ans = num1 * num1, "√x");
+        }
+        private void sqrFunctions (double x, string y)
+        {
+            double ans = x;
+            string sqr = "";
             num1 = ans;
+            sqr = y;
             tbCalc.Text = num1.ToString();
+            calc_history.Add($"{tbCalc.Text} {sqr}");
+            calc_history.Add($"={tbAnswer.Text}");
             displayAnswer();
         }
         private void btnEnter_Click(object sender, RoutedEventArgs e)
@@ -222,7 +239,7 @@ namespace simpleCalcMP
                 ope = -1;
                 num2 = 0;
             }
-            calc_history.Add(tbAnswer.Text);
+            calc_history.Add($"={tbAnswer.Text}");
         }
         #endregion
 
